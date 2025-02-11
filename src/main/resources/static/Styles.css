@@ -1,0 +1,70 @@
+/* Estilos Generales */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor Principal */
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Encabezado */
+header {
+  background: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* Sección de archivos */
+.options, .api {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Enlaces */
+.file-links, .api-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-links a, .api-links a {
+  display: block;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.file-links a:hover, .api-links a:hover {
+  background: #0056b3;
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: gray;
+}
