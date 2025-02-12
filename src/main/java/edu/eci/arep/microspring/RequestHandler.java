@@ -58,6 +58,7 @@ public class RequestHandler {
         if (WebFrameWork.routes.containsKey(path)) {
             Method controllerMethod = WebFrameWork.routes.get(path);
             Object controllerInstance = WebFrameWork.controllers.get(controllerMethod.getDeclaringClass().getName());
+            
 
             try {
                 String response;
@@ -91,7 +92,7 @@ public class RequestHandler {
         if (method != null) {
             try {
                 System.out.println("✅ Ejecutando ruta dinámica: " + path);
-                System.out.println("📌 Método encontrado: " + method.getName());
+                System.out.println("🔹 Método encontrado: " + (method != null ? method.getName() : "null"));
                 System.out.println("📌 Número de parámetros: " + method.getParameterCount());
 
                 Object controllerInstance = WebFrameWork.controllers.get(method.getDeclaringClass().getName());
@@ -120,9 +121,6 @@ public class RequestHandler {
         return "404 Not Found";
     }
 
-    /**
-     * Sirve archivos estáticos como HTML o imágenes PNG.
-     */
     private static boolean serveStaticFile(PrintWriter writer, OutputStream outputStream, String path)
             throws IOException {
         String staticPath = WebFrameWork.getStaticFilesPath();

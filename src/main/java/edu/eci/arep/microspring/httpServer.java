@@ -15,17 +15,12 @@ public class httpServer {
         String Package = "edu.eci.arep.microspring.Server";
         WebFrameWork.scanControllers(Package);
 
-        String controllerClassName = args[0];
 
         // Configuración de los archivos estáticos
         WebFrameWork.StaticFiles("src/main/resources/static");
+        
+        WebFrameWork.loadController("edu.eci.arep.microspring.Server");
 
-        try {
-            WebFrameWork.loadController("edu.eci.arep.microspring.Server.GreetingController");
-            System.out.println("Cargando controlador" + controllerClassName);
-        } catch (Exception e) {
-            System.out.println("Error al cargar el controlador" + e.getMessage());
-        }
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {

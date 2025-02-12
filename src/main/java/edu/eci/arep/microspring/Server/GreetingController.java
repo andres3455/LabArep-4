@@ -19,5 +19,8 @@ public class GreetingController {
         return "✅ Ruta /App/test funcionando correctamente!";
     }
 
-
+    @GetMapping("/App/weather")
+    public String weather(){
+        return "Este servicio fue dado de baja";
+    }
 }
