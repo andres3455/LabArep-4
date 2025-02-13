@@ -9,8 +9,8 @@ import java.net.URL;
 import java.util.*;
 
 public class WebFrameWork {
-    static final Map<String, Method> routes = new HashMap<>();
-    static final Map<String, Object> controllers = new HashMap<>();
+    public static final Map<String, Method> routes = new HashMap<>();
+    public static final Map<String, Object> controllers = new HashMap<>();
     private static final Set<Class<?>> loadedControllers = new HashSet<>();
     private static String staticFilesPath = "src/main";
 

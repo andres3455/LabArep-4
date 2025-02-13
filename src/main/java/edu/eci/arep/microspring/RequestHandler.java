@@ -158,7 +158,7 @@ public class RequestHandler {
         writer.println(body);
     }
 
-    private static Map<String, String> parseQueryString(String queryString) {
+    public static Map<String, String> parseQueryString(String queryString) {
         Map<String, String> queryParams = new HashMap<>();
         if (queryString != null) {
             for (String param : queryString.split("&")) {

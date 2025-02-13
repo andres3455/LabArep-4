@@ -15,6 +15,34 @@ Para este taller desarrolle un prototipo mínimo que demuestre las capacidades r
 ### Arquitectura representada por Capas
 
 ```
+┌────────────────────────────────────────────────┐
+│           Capa de Presentación (Frontend)      │
+│        ( HTML, JavaScript,CSS)                 │           
+└────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌────────────────────────────────────────────────┐
+│          Capa de Controladores (Server)        │
+│  - @GreetingController                         │
+│  - @MathController                             │
+│  - Métodos con @GetMapping("/ruta")            │
+└────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌────────────────────────────────────────────────┐
+│        Capa del Framework Web (MicroSpring)    │
+│  - WebFrameWork → Registra rutas y métodos     │
+│  - RequestHandler → Ejecuta métodos dinámicos
+|  - Response -> Maneja la respuesta
+    - Request -> Maneja la petición 
+└────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌────────────────────────────────────────────────┐
+│           Capa de Persistencia (Opcional)      │
+│     (MongoDB o almacenamiento en archivos)     │
+└────────────────────────────────────────────────┘
+
 
 ```
 
@@ -69,7 +97,7 @@ Aquí podemos observar formato de nuestro servidor HTTP.
 Utilizamos el siguiente comando para cumplir dicho objetivo
 
 ```
-java -cp "target/classes" edu.eci.arep.microspring.Server.MicroServer edu.eci.arep.microspring.Server.GreetingController                                                      
+java -cp "target/classes" edu.eci.arep.microspring.Server.MicroServer edu.eci.arep.microspring.Server                                                      
 
 ```
 Con esto logramos invocar el framework
@@ -158,7 +186,13 @@ para ejecutar las pruebas, puede utilizar el siguiente comando
 
 ```
 mvn clean test
+
 ```
+
+
+### Evidencia de las pruebas 
+
+![image](img/10.png)
 
 
 ### Construido con
