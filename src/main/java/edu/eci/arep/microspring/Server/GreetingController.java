@@ -1,10 +1,12 @@
 package edu.eci.arep.microspring.Server;
 
+
 @RestController
 public class GreetingController {
 
+
     @GetMapping("/App/hello")
-    public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return "Hello, " + name + "!";
     }
 
@@ -23,4 +25,6 @@ public class GreetingController {
     public String weather(){
         return "Este servicio fue dado de baja";
     }
+
+
 }

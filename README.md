@@ -91,19 +91,66 @@ Esta anotación,la habiamos creado en clase, por lo tanto, solamente debemos cam
 
 se crea un metodo dentro de la clase WebFrameWork, el cual nos va a permitir escanear un paquete dado para clases con la anotación @RestController y registrar sus metodos que tenga la anotación @ GetMapping
 
+```
+public static List<Class<?>> scanControllers(String packageName) {
+        List<Class<?>> controllerClasses = new ArrayList<>();
+        try {
+            String path = packageName.replace(".", "/");
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(path);
+
+            if (resource == null) {
+                throw new RuntimeException("No se encontró el paquete base: " + packageName);
+            }
+
+            File directory = new File(resource.toURI());
+
+            File[] classFiles = directory.listFiles((dir, name) -> name.endsWith(".class"));
+            if (classFiles == null) {
+                throw new RuntimeException("No se encontraron clases en el paquete: " + packageName);
+            }
+
+            for (File classFile : classFiles) {
+                String className = packageName + "." + classFile.getName().replace(".class", "");
+                Class<?> controllerClass = Class.forName(className);
+
+                if (controllerClass.isAnnotationPresent(RestController.class)) {
+                    controllerClasses.add(controllerClass);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error al escanear los controladores: " + e.getMessage(), e);
+        }
+        return controllerClasses;
+    }
+
+```
+Deberia escanear la clase que contiene los siguiente metodos marcados con la anotación y cargarlos
+
+![image](img/5.png)
+
+![image](img/6.png)
 
 
-2) Mecanismo de extracción de valores de consulta:
+Aqui podemos ver, que lo hace correctamente
 
-![](/img/5.png)
 
-Para esta parte, se implementó un mecanismo el cual extrae los valores de una consulta, en este caso una querystring, de donde tenemos el parámetro "name" con valor "Andrés" para ello se utiliza el método .get pasándole la ruta que queremos que responda y me retornara un mensaje de "hola" identado con el valor del parámetro que extrajimos
+![image](img/7.png)
 
-3) Especificación de ubicación de archivo estático
 
-![Imagen](img/6.png)
+4) Debe soportat @RequestParam
 
-Antes lo que hacíamos, era asignar a una variable, la ruta donde estaban nuestros archivos, ahora debemos implementar un método, lo que se realizó fue definir una ruta por defecto como una variable, luego se creó el método que cambia esa variable que definimos, por el nuevo argumento que especifiquemos al llamar al método.
+![image](img/9.png)
+
+### Pruebas de su funcionamiento
+
+A su vez tambien atiende el metodo hello, con parametros
+
+
+![image](img/8.png)
+
+
+![image](img/10.png)
+
 
 ## Pruebas
 
@@ -113,11 +160,6 @@ para ejecutar las pruebas, puede utilizar el siguiente comando
 mvn clean test
 ```
 
-![Imagen](img/7.png)
-
-## Cobertura de las pruebas con JaCoCo
-
-![Imagen](img/8.png)
 
 ### Construido con
 
