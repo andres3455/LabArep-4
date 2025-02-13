@@ -36,12 +36,7 @@ Para este taller desarrolle un prototipo mínimo que demuestre las capacidades r
 |  - Response -> Maneja la respuesta
     - Request -> Maneja la petición 
 └────────────────────────────────────────────────┘
-                        │
-                        ▼
-┌────────────────────────────────────────────────┐
-│           Capa de Persistencia (Opcional)      │
-│     (MongoDB o almacenamiento en archivos)     │
-└────────────────────────────────────────────────┘
+                        
 
 
 ```
