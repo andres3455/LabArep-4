@@ -47,6 +47,12 @@ public class RequestHandler {
             path = "/index.html";
         }
 
+        if (path.equals("/shutdown")) {
+            httpServer.handleShutdown(outputStream);
+            clientSocket.close(); // Cierra la conexión después de la respuesta
+            return; // 🔥 Importante: evitar que el flujo continúe
+        }
+
         // Servir archivos estáticos (HTML, imágenes PNG)
         if (serveStaticFile(writer, outputStream, path)) {
             return;

@@ -10,7 +10,7 @@
     <div class="container">
         <header>
             <h1>🌐 Servidor en Funcionamiento</h1>
-            <p>¡Bienvenido a mi servidor HTTP, abajo encontrara los diferentes tipos de archivos que tengo disponibles!</p>
+            <p>¡Bienvenido a mi servidor HTTP, abajo encontrará los diferentes tipos de archivos que tengo disponibles!</p>
         </header>
 
         <section class="options">
@@ -27,12 +27,35 @@
         <section class="api">
             <h2>🛠 CONOCE NUESTRO SERVICIO API REST</h2>
             <div class="api-links">
-                <a href="/App/weather">📝 Conozca el clima de Bogota</a>
-                <a href="/App/hello">📝 Que bonito es saludar y ser saludado</a>
-                <a href="/App/pi">📝 Este es el numero Pi</a>    
-                <a href="/App/e"> Este es el numero de Euler</a>            
+                <a href="/App/weather">🌦 Conozca el clima de Bogotá</a>
+                <a href="/App/hello">👋 Que bonito es saludar y ser saludado</a>
+                <a href="/App/pi">🔢 Este es el número Pi</a>    
+                <a href="/App/e">📈 Este es el número de Euler</a>            
             </div>
         </section>
+
+        <section class="shutdown">
+            <h2>⚠️ Apagar Servidor</h2>
+            <button id="shutdown">🛑 Apagar Servidor</button>
+            <p id="shutdownMessage" style="display: none; color: red; font-weight: bold;">
+                🔴 Servidor apagado. Debe reiniciar manualmente.
+            </p>
+        </section>
+
+        <script>
+            document.getElementById("shutdown").addEventListener("click", function() {
+                fetch("/shutdown")
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById("shutdownMessage").style.display = "block";
+                        } else {
+                            alert("Error: No se pudo apagar el servidor.");
+                        }
+                    })
+                    .catch(error => console.error("Error al apagar el servidor:", error));
+            });
+        </script>
+
         <footer>
             <p>&copy; 2025 Servidor HTTP Simple. Todos los derechos reservados.</p>
         </footer>
