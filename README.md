@@ -80,7 +80,7 @@ docker run -d -p 34000:35000 --name firstdockercontainer microspringdocker
 
 ## Imagenes de referencia
 
-
+![Imagen1](img/1.png)
 ---
 
 ## Ejecución
@@ -108,7 +108,6 @@ http://localhost:35000
 
 Aquí podemos observar formato de nuestro servidor HTTP.
 
-![Imagen1](img/1.png)
 
 1) Primera Version, cargue el POJO desde la linea de comando
 
