@@ -1,8 +1,7 @@
 # Escuela Colombiana de Ingeniería
 # Arquitecturas Empresariales
 
-## Taller 4 
-Modularización con virtualización y introduccion a Docker
+## Taller 4 Modularización con virtualización y introduccion a Docker
 
 ## Descripcion del laboratorio
 
