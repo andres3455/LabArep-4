@@ -44,9 +44,30 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
 └────────────────────────────────────────────────┘
                         
 
-
 ```
 
+        +-------------------+
+        |   Client (Browser) |
+        +-------------------+
+                |
+                v
+     +---------------------------+
+     |    AWS EC2 Instance        |
+     |  (Web Server + Docker)     |
+     +---------------------------+
+                |
+                v
+     +---------------------------+
+     |    Docker Container       |
+     |  (App/Service from Docker)|
+     +---------------------------+
+                |
+                v
+     +---------------------------+
+     |       Docker Hub          |
+     |    (Docker Images)        |
+     +---------------------------+
+```
 
 
 
