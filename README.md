@@ -48,7 +48,7 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
 
 ## Diseño de Clases
 
-
+1. Clase HttpServer: Es la clase principal que arranca el servidor y gestiona las peticiones HTTP
 
 ### Instalación
 
