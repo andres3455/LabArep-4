@@ -1,16 +1,22 @@
 # Escuela Colombiana de Ingeniería
 # Arquitecturas Empresariales
 
-## Taller 3 Taller de Arquitecturas de Servidores de Aplicaciones, Meta protocolos de objetos, Patrón IoC, Reflexión
-Se trabajó implementando las clases vistas en clase, junto con el servidor HTTP que venimos desarrollando en anteriores laboratorios
+## Taller 4 Taller de modularización con virtualización y introduccion a Docker
 
-Para este taller desarrolle un prototipo mínimo que demuestre las capacidades reflexivas de JAVA y permita por lo menos cargar un bean (POJO) y derivar una aplicación Web a partir de él. 
+## Descripcion del laboratorio
+
+En este laboratorio, se trabajó con el framework desarrollado previamente, con el objetivo de implementar concurrencia para mejorar su rendimiento. Además, se buscó optimizar la salida del programa para que fuera más clara y elegante. Finalmente, se realizó el despliegue de la aplicación utilizando instancias EC2 en AWS y contenedores Docker.
+
 
 ---
 ### Prerrequisitos
 
 * [Maven](https://maven.apache.org/): Es una herramienta de comprensión y gestión de proyectos de software. Basado en el concepto de modelo de objetos de proyecto (POM), Maven puede gestionar la construcción, los informes y la documentación de un proyecto desde una pieza de información central.
 * [Git](https://learn.microsoft.com/es-es/devops/develop/git/what-is-git): Es un sistema de control de versiones distribuido, lo que significa que un clon local del proyecto es un repositorio de control de versiones completo. Estos repositorios locales plenamente funcionales permiten trabajar sin conexión o de forma remota con facilidad.
+
+* [Docker](https://www.docker.com/): Es una plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores. Permite empaquetar una aplicación y sus dependencias en un contenedor ligero y portátil, garantizando la consistencia en diferentes entornos.
+
+##
 
 ### Arquitectura representada por Capas
 
