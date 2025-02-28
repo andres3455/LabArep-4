@@ -67,7 +67,6 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
      |       Docker Hub          |
      |    (Docker Images)        |
      +---------------------------+
-```
 
 
 
