@@ -2,11 +2,8 @@ package edu.eci.arep.microspring;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -55,34 +52,4 @@ public class httpServer {
         }
     }
 
-    public static void handleShutdown(OutputStream out) throws IOException {
-        System.out.println("🛑 Apagando el servidor...");
-
-        running = false; // 🔹 Detener el bucle principal
-        stop();
-
-        // Intentar cerrar el socket del servidor
-        if (serverSocket != null && !serverSocket.isClosed()) {
-            serverSocket.close();
-        }
-
-        // Mostrar la página de apagado
-        String htmlPath = "src/main/resources/static/shutdown.html";
-        byte[] content = Files.readAllBytes(Paths.get(htmlPath));
-        sendResponse(out, "200 OK", "text/html", content);
-    }
-
-    public static void stop() {
-        running = false;
-        System.out.println("✅ Servidor detenido correctamente.");
-    }
-
-    private static void sendResponse(OutputStream out, String status, String contentType, byte[] content)
-            throws IOException {
-        out.write(("HTTP/1.1 " + status + "\r\n").getBytes());
-        out.write(("Content-Type: " + contentType + "\r\n").getBytes());
-        out.write("\r\n".getBytes());
-        out.write(content);
-        out.flush();
-    }
 }
