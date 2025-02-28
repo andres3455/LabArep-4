@@ -1,7 +1,8 @@
 # Escuela Colombiana de Ingeniería
 # Arquitecturas Empresariales
 
-## Taller 4 Taller de modularización con virtualización y introduccion a Docker
+## Taller 4 
+Modularización con virtualización y introduccion a Docker
 
 ## Descripcion del laboratorio
 
@@ -16,9 +17,9 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
 
 * [Docker](https://www.docker.com/): Es una plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores. Permite empaquetar una aplicación y sus dependencias en un contenedor ligero y portátil, garantizando la consistencia en diferentes entornos.
 
-##
+---
 
-### Arquitectura representada por Capas
+## Arquitectura representada por Capas
 
 ```
 ┌────────────────────────────────────────────────┐
