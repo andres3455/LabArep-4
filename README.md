@@ -70,6 +70,11 @@ cd LabArep-4
 ```
 docker build --tag microspringdocker .
 ```
+-- Video de la contrucción de la imagen
+
+https://github.com/user-attachments/assets/96ac6a6b-bb51-4823-a697-e72bba3cda27
+
+
 4) Creamos la imagen de un container para poder ejecutarlo
 
 Recomendacion: Se sugiere crear 3 imagenes diferentes para poder acceder desde varios puertos
@@ -81,138 +86,84 @@ docker run -d -p 34000:35000 --name firstdockercontainer microspringdocker
 ## Imagenes de referencia
 
 ![Imagen1](img/1.png)
----
 
-## Ejecución
-
-### Primera Forma
-En la terminal de comando, utilizamos la sentencia:
-```
-mvn exec:java -"Dexec.mainClass"="edu.eci.arep.http.httpServer"  
-```
-
-### Segunda Forma
-1) En la barra de navegación de nuestro IDE, buscamos la opción "Ejecutar".
-   
-2) Luego, elegimos la opción "iniciar depuración" o "Ejecutar sin depuración"
-
-
-## Casos de uso
-
-Una vez ejecutado, accedemos a la URL en un navegador
-
-```
-http://localhost:35000
-```
-
-
-Aquí podemos observar formato de nuestro servidor HTTP.
-
-
-1) Primera Version, cargue el POJO desde la linea de comando
-
-Utilizamos el siguiente comando para cumplir dicho objetivo
-
-```
-java -cp "target/classes" edu.eci.arep.microspring.Server.MicroServer edu.eci.arep.microspring.Server                                                      
-
-```
-Con esto logramos invocar el framework
+En docker, se debe ver algo asi:
 
 ![Imagen1](img/2.png)
 
-como podemos ver, hemos puesto unas salidas de texto, para controlar el registro de rutas
-
-2) Atiende la anotación @GetMapping 
-
-Esta anotación,la habiamos creado en clase, por lo tanto, solamente debemos cambiar lo que queremos que nos regrese el servicio
-
-
-![image](img/3.png)
-
-![image](img/4.png)
-
-3) Version final, busqueda de clases con una anotación
-
-se crea un metodo dentro de la clase WebFrameWork, el cual nos va a permitir escanear un paquete dado para clases con la anotación @RestController y registrar sus metodos que tenga la anotación @ GetMapping
+## Comandos que te pueden ayudar para esta parte
 
 ```
-public static List<Class<?>> scanControllers(String packageName) {
-        List<Class<?>> controllerClasses = new ArrayList<>();
-        try {
-            String path = packageName.replace(".", "/");
-            URL resource = Thread.currentThread().getContextClassLoader().getResource(path);
-
-            if (resource == null) {
-                throw new RuntimeException("No se encontró el paquete base: " + packageName);
-            }
-
-            File directory = new File(resource.toURI());
-
-            File[] classFiles = directory.listFiles((dir, name) -> name.endsWith(".class"));
-            if (classFiles == null) {
-                throw new RuntimeException("No se encontraron clases en el paquete: " + packageName);
-            }
-
-            for (File classFile : classFiles) {
-                String className = packageName + "." + classFile.getName().replace(".class", "");
-                Class<?> controllerClass = Class.forName(className);
-
-                if (controllerClass.isAnnotationPresent(RestController.class)) {
-                    controllerClasses.add(controllerClass);
-                }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Error al escanear los controladores: " + e.getMessage(), e);
-        }
-        return controllerClasses;
-    }
-
-```
-Deberia escanear la clase que contiene los siguiente metodos marcados con la anotación y cargarlos
-
-![image](img/5.png)
-
-![image](img/6.png)
-
-
-Aqui podemos ver, que lo hace correctamente
-
-
-![image](img/7.png)
-
-
-4) Debe soportat @RequestParam
-
-![image](img/9.png)
-
-### Pruebas de su funcionamiento
-
-A su vez tambien atiende el metodo hello, con parametros
-
-
-![image](img/8.png)
-
-
-![image](img/10.png)
-
-
-## Pruebas
-
-para ejecutar las pruebas, puede utilizar el siguiente comando 
-
-```
-mvn clean test
-
+docker logs [imagen del contenedor]
+docker exec -it [imagen del contenedor] sh
+docker ps
+docker images 
 ```
 
+## Antes de configurar AWS EC2
 
-### Evidencia de las pruebas 
+Debemos crear un repositorio en dockerHub:
 
-![image](img/11.png)
+![Imagen1](img/3.png)
+
+Luego lo que haremos es crear una referencia del repositorio a nuestra imagen que creamos anteriomente,
+
+```
+docker tag microspringdocker andres3455/dockerandres
+```
+![Imagen1](img/4.png)
+
+Nos logeamos desde la consola 
+```
+docker login
+```
+Empujamos la imagen al repositorio en DockerHub
+
+```
+docker push andres3455/dockerandres:latest
+```
+![Imagen1](img/5.png)
+
+![Imagen1](img/3.png)
+
+## Despliegue en AWS
+
+Creamos una instancia en AWS EC2 con un sistema operativo basado en Linux , y accedemos a la consola de la instancia.
+
+![Imagen1](img/6.png)
+
+Instalamos docker en la instancia con el siguiente comando:
+
+```
+sudo apt install docker
+sudo service docker start
+```
+Se configura el usuario en el grupo de docker para no tener que usar sudo cada vez que invoquemos un comando
+
+```
+sudo usermod -aG docker ubuntu
+```
+Nos desconectamos de la maquina para guardar los cambios y volvemos a ingresar
+
+### Ultimo paso
+
+A partir de la imagen del repo que creamos en dockerhub , creamos una instancia a una nuevo contenedor independiente de la consola con el puerto 80, enlazada al puerto donde manejamos nuestro servidor de manera local (35000)
+
+```
+docker run -d -p 80:35000 --name firstdockeraws andres3455/dockerandres
+```
+![Imagen1](img/7.png)
+
+-- Video
+
+https://github.com/user-attachments/assets/3bcb667f-f794-48a0-a6c9-f783d4b4af7f
+
+Si todo sale bien , podremos acceder a nuestro servidor sede la Ip publica de la instancia como se muestra en el siguiente video
 
 
-https://github.com/user-attachments/assets/1fc21334-1c9b-4d9f-a101-d4772bc3cffa
+https://github.com/user-attachments/assets/0b8c6281-517f-472e-bf43-a625b47a4f52
+
+
 
 
 ### Construido con
