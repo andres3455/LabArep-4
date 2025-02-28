@@ -49,12 +49,18 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
 ## Diseño de Clases
 
 1. Clase HttpServer: Es la clase principal que arranca el servidor y gestiona las peticiones HTTP
+   
+2. Clase WebFramework: Clase que maneja el registro, la ejecucion y la correcta lectura de los controladores REST
+   
+3. Clase RequestHandler: Maneja las peticiones que vengan del cliente y retorna la respuesta correspondiente
+   
+4. Clases MathController y GreetingController: Manejan y los recursos que queremos exponer 
 
-### Instalación
+### Instalación y instrucciones de despliegue
 
 1) Debemos clonar el repositorio
 ```
-https://github.com/andres3455/ArepLab3.git
+
 ```
 2) Una vez clonamos, accedemos al directorio
 ```
