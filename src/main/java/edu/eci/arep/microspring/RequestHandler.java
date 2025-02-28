@@ -127,34 +127,29 @@ public class RequestHandler {
         return "404 Not Found";
     }
 
-    private static boolean serveStaticFile(PrintWriter writer, OutputStream outputStream, String path)
-            throws IOException {
+    private static boolean serveStaticFile(PrintWriter writer, OutputStream outputStream, String path) throws IOException {
         String staticPath = WebFrameWork.getStaticFilesPath();
         File file = new File(staticPath + path);
-
+    
         if (file.exists() && !file.isDirectory()) {
-            String contentType = Files.probeContentType(Paths.get(file.getAbsolutePath()));
-
+            String contentType = Files.probeContentType(file.toPath());
+            byte[] fileBytes = Files.readAllBytes(file.toPath()); // Leer archivo en bytes
+    
             writer.printf("HTTP/1.1 200 OK\r\n");
-            writer.println("Content-Type: " + (contentType != null ? contentType : "text/plain") + "; charset=UTF-8");
-            writer.println("Content-Length: " + file.length());
+            writer.println("Content-Type: " + (contentType != null ? contentType : "application/octet-stream") + "; charset=UTF-8");
+            writer.println("Content-Length: " + fileBytes.length);
             writer.println();
             writer.flush();
-
-            if (contentType != null && contentType.startsWith("image")) {
-                Files.copy(file.toPath(), outputStream);
-            } else {
-                BufferedReader fileReader = new BufferedReader(new FileReader(file));
-                String line;
-                while ((line = fileReader.readLine()) != null) {
-                    writer.println(line);
-                }
-                fileReader.close();
-            }
+    
+            // Escribir los bytes al outputStream
+            outputStream.write(fileBytes);
+            outputStream.flush(); // Asegurar que se envían todos los bytes correctamente
+    
             return true;
         }
         return false;
     }
+    
 
     private static void sendResponse(PrintWriter writer, int statusCode, String statusMessage, String body) {
         writer.printf("HTTP/1.1 %d %s\r\n", statusCode, statusMessage);

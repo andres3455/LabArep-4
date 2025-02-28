@@ -12,7 +12,8 @@ public class WebFrameWork {
     public static final Map<String, Method> routes = new HashMap<>();
     public static final Map<String, Object> controllers = new HashMap<>();
     private static final Set<Class<?>> loadedControllers = new HashSet<>();
-    private static String staticFilesPath = "src/main";
+    private static String staticFilesPath = "/usrapp/bin/www";
+
 
     public static void loadController(String packageName) {
         try {

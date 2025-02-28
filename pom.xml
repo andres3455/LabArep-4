@@ -11,8 +11,13 @@
     <name>areplab3</name>
     <url>http://maven.apache.org</url>
 
-    <dependencies>
+    <properties>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
+    <dependencies>
         <!-- JUnit 5 (recomendado) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -24,14 +29,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Mockito para pruebas unitarias -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -52,11 +49,16 @@
 
     <build>
         <plugins>
-            <!-- Plugin de Maven Surefire para ejecutar pruebas con JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

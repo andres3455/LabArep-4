@@ -1,6 +1,5 @@
 package edu.eci.arep.microspring.Server;
 
-
 @RestController
 public class GreetingController {
 

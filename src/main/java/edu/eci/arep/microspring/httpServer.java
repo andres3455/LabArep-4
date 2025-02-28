@@ -1,5 +1,6 @@
 package edu.eci.arep.microspring;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -20,7 +21,16 @@ public class httpServer {
         WebFrameWork.scanControllers(Package);
 
         // Configuración de los archivos estáticos
-        WebFrameWork.StaticFiles("src/main/resources/static");
+
+        String staticPath;
+        if (new File("/usrapp/bin/www").exists()) {
+            staticPath = "/usrapp/bin/www"; // Para Docker
+        } else {
+            staticPath = "src/main/resources/www"; // Para local
+        }
+
+        WebFrameWork.StaticFiles(staticPath);
+        System.out.println("📂 Sirviendo archivos desde: " + staticPath);
         WebFrameWork.loadController("edu.eci.arep.microspring.Server");
 
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
@@ -48,7 +58,7 @@ public class httpServer {
     public static void handleShutdown(OutputStream out) throws IOException {
         System.out.println("🛑 Apagando el servidor...");
 
-        running = false;  // 🔹 Detener el bucle principal
+        running = false; // 🔹 Detener el bucle principal
         stop();
 
         // Intentar cerrar el socket del servidor
@@ -67,7 +77,8 @@ public class httpServer {
         System.out.println("✅ Servidor detenido correctamente.");
     }
 
-    private static void sendResponse(OutputStream out, String status, String contentType, byte[] content) throws IOException {
+    private static void sendResponse(OutputStream out, String status, String contentType, byte[] content)
+            throws IOException {
         out.write(("HTTP/1.1 " + status + "\r\n").getBytes());
         out.write(("Content-Type: " + contentType + "\r\n").getBytes());
         out.write("\r\n".getBytes());
