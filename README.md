@@ -60,16 +60,27 @@ En este laboratorio, se trabajó con el framework desarrollado previamente, con 
 
 1) Debemos clonar el repositorio
 ```
-
+https://github.com/andres3455/LabArep-4.git
 ```
 2) Una vez clonamos, accedemos al directorio
 ```
-cd ArepLab3
+cd LabArep-4
 ```
-3) Construimos el proyecto
+3) Construimos la imagen de docker
 ```
-mvn package
+docker build --tag microspringdocker .
 ```
+4) Creamos la imagen de un container para poder ejecutarlo
+
+Recomendacion: Se sugiere crear 3 imagenes diferentes para poder acceder desde varios puertos
+
+```
+docker run -d -p 34000:35000 --name firstdockercontainer microspringdocker
+```
+
+## Imagenes de referencia
+
+
 ---
 
 ## Ejecución
